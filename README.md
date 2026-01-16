@@ -1,6 +1,7 @@
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/d484ea6b-d07c-4390-981e-1786fbc0bc15" alt="Banner" style="width: 100%; max-width: 800px;" />
+    <img src="https://github.com/user-attachments/assets/d8939cb2-9952-4e31-9c80-521788a9fe53" alt="Banner" style="width: 100%; max-width: 800px;" />
 </p>
+
 
 <p align="center">
     <a href="https://github.com/aipencil/smoothie/actions"><img alt="Tests passing" src="https://img.shields.io/badge/Tests-passing-green?style=for-the-badge&logo=github"></a>
