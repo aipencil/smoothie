@@ -14,6 +14,15 @@ abstract class CodeEnvironment
 
     abstract public function guidelinesPath(): string;
 
+    /**
+     * Whether this code environment supports instruction files (applyTo patterns).
+     * VS Code/GitHub Copilot uses instruction files, Claude Code does not.
+     */
+    public function supportsInstructionFiles(): bool
+    {
+        return true;
+    }
+
     final public static function all(): array
     {
         return [
@@ -22,7 +31,6 @@ abstract class CodeEnvironment
             new Cursor,
             new ClaudeCode,
             new Codex,
-            new Copilot,
             new Gemini,
             new OpenCode,
         ];
@@ -46,8 +54,8 @@ final class VSCode extends CodeEnvironment
     {
         parent::__construct(
             name: 'vscode',
-            label: 'VS Code',
-            skillsPath: '.github/copilot/skills/filament-development'
+            label: 'VS Code / GitHub Copilot',
+            skillsPath: '.github/skills/filament-development'
         );
     }
 
@@ -106,6 +114,11 @@ final class ClaudeCode extends CodeEnvironment
     {
         return 'CLAUDE.md';
     }
+
+    public function supportsInstructionFiles(): bool
+    {
+        return false;
+    }
 }
 
 final class Codex extends CodeEnvironment
@@ -122,23 +135,6 @@ final class Codex extends CodeEnvironment
     public function guidelinesPath(): string
     {
         return 'AGENTS.md';
-    }
-}
-
-final class Copilot extends CodeEnvironment
-{
-    public function __construct()
-    {
-        parent::__construct(
-            name: 'copilot',
-            label: 'GitHub Copilot',
-            skillsPath: '.github/copilot/skills/filament-development'
-        );
-    }
-
-    public function guidelinesPath(): string
-    {
-        return '.github/copilot-instructions.md';
     }
 }
 
