@@ -3,20 +3,23 @@
 declare(strict_types=1);
 
 use Aipencil\Smoothie\Install\ClaudeCode;
+use Aipencil\Smoothie\Install\CodeEnvironment;
 use Aipencil\Smoothie\Install\Codex;
-use Aipencil\Smoothie\Install\Copilot;
 use Aipencil\Smoothie\Install\Cursor;
 use Aipencil\Smoothie\Install\Gemini;
 use Aipencil\Smoothie\Install\OpenCode;
 use Aipencil\Smoothie\Install\PhpStorm;
 use Aipencil\Smoothie\Install\VSCode;
 
+// Ensure CodeEnvironment is loaded first so all sibling classes are available
+class_exists(CodeEnvironment::class);
+
 test('VSCode has correct properties', function (): void {
     $vscode = new VSCode;
 
     expect($vscode->name)->toBe('vscode')
-        ->and($vscode->label)->toBe('VS Code')
-        ->and($vscode->skillsPath)->toBe('.github/copilot/skills/filament-development')
+        ->and($vscode->label)->toBe('VS Code / GitHub Copilot')
+        ->and($vscode->skillsPath)->toBe('.github/skills/filament-development')
         ->and($vscode->guidelinesPath())->toBe('.github/copilot-instructions.md');
 });
 
@@ -56,15 +59,6 @@ test('Codex has correct properties', function (): void {
         ->and($codex->guidelinesPath())->toBe('AGENTS.md');
 });
 
-test('Copilot has correct properties', function (): void {
-    $copilot = new Copilot;
-
-    expect($copilot->name)->toBe('copilot')
-        ->and($copilot->label)->toBe('GitHub Copilot')
-        ->and($copilot->skillsPath)->toBe('.github/copilot/skills/filament-development')
-        ->and($copilot->guidelinesPath())->toBe('.github/copilot-instructions.md');
-});
-
 test('Gemini has correct properties', function (): void {
     $gemini = new Gemini;
 
@@ -84,29 +78,28 @@ test('OpenCode has correct properties', function (): void {
 });
 
 test('CodeEnvironment::all returns all environments', function (): void {
-    $environments = Aipencil\Smoothie\Install\CodeEnvironment::all();
+    $environments = CodeEnvironment::all();
 
-    expect($environments)->toHaveCount(8)
+    expect($environments)->toHaveCount(7)
         ->and($environments[0])->toBeInstanceOf(VSCode::class)
         ->and($environments[1])->toBeInstanceOf(PhpStorm::class)
         ->and($environments[2])->toBeInstanceOf(Cursor::class)
         ->and($environments[3])->toBeInstanceOf(ClaudeCode::class)
         ->and($environments[4])->toBeInstanceOf(Codex::class)
-        ->and($environments[5])->toBeInstanceOf(Copilot::class)
-        ->and($environments[6])->toBeInstanceOf(Gemini::class)
-        ->and($environments[7])->toBeInstanceOf(OpenCode::class);
+        ->and($environments[5])->toBeInstanceOf(Gemini::class)
+        ->and($environments[6])->toBeInstanceOf(OpenCode::class);
 });
 
 test('CodeEnvironment::byName returns correct environment', function (): void {
-    $vscode = Aipencil\Smoothie\Install\CodeEnvironment::byName('vscode');
-    $cursor = Aipencil\Smoothie\Install\CodeEnvironment::byName('cursor');
+    $vscode = CodeEnvironment::byName('vscode');
+    $cursor = CodeEnvironment::byName('cursor');
 
     expect($vscode)->toBeInstanceOf(VSCode::class)
         ->and($cursor)->toBeInstanceOf(Cursor::class);
 });
 
 test('CodeEnvironment::byName returns null for unknown environment', function (): void {
-    $unknown = Aipencil\Smoothie\Install\CodeEnvironment::byName('unknown');
+    $unknown = CodeEnvironment::byName('unknown');
 
     expect($unknown)->toBeNull();
 });

@@ -120,65 +120,28 @@ final class SkillWriter
 
     protected function updateGuidelinesFile(Skill $skill): void
     {
+        // Claude Code doesn't use instruction files - skills are self-contained
+        if (! $this->environment->supportsInstructionFiles()) {
+            return;
+        }
+
         $guidelinesPath = base_path($this->environment->guidelinesPath());
+        $instructionsDir = dirname($guidelinesPath).'/instructions';
 
-        if (! file_exists($guidelinesPath)) {
+        if (! $this->ensureDirectoryExists($instructionsDir)) {
             return;
         }
 
-        $content = file_get_contents($guidelinesPath);
-        if ($content === false) {
-            return;
-        }
+        $skillInstructionFile = $instructionsDir.'/'.$skill->name.'.instructions.md';
+        $skillPath = $this->environment->skillsPath.'/'.$skill->name.'/**';
 
-        if (str_contains($content, "`{$skill->name}`")) {
-            return;
-        }
-
-        // Look for the filament rules section and Skills Activation subsection
-        $filamentPattern = '/(===\s*filament\/filament\s*rules\s*===)/is';
-        $skillsPattern = '/(===\s*filament\/filament\s*rules\s*===.*?)(## Skills Activation.*?)(?===\s*\w+\/\w+|$)/is';
-
-        if (! preg_match($filamentPattern, $content)) {
-            return; // Filament rules section not found
-        }
-
-        // Check if Skills Activation subsection exists
-        if (preg_match($skillsPattern, $content, $matches)) {
-            // Skills Activation section exists, add skill to it
-            $skillsSection = $matches[2];
-        } else {
-            // Skills Activation section doesn't exist, create it
-            $skillsSection = "## Skills Activation\n\n";
-            // Insert it after the filament rules section header
-            $content = preg_replace(
-                $filamentPattern,
-                '$1'."\n\n".$skillsSection,
-                $content,
-                1
-            );
-        }
-
-        // Now add the skill entry to the Skills Activation section
         $description = preg_replace('/\s+/', ' ', mb_trim($skill->description));
-        $skillEntry = "- `{$skill->name}` — {$description}";
+        $content = "---\n";
+        $content .= "applyTo: \"{$skillPath}\"\n";
+        $content .= "---\n\n";
+        $content .= "# {$skill->name}\n\n";
+        $content .= "{$description}\n";
 
-        // Add skill to Skills Activation section
-        $skillsActivationPattern = '/(## Skills Activation\n)(.*?)(?=\n===|$)/is';
-
-        if (preg_match($skillsActivationPattern, $content, $matches)) {
-            $updatedSection = $matches[1].$matches[2]."\n".$skillEntry;
-            $content = preg_replace($skillsActivationPattern, $updatedSection, $content, 1);
-        } else {
-            // Fallback: just append the skill entry
-            $content = preg_replace(
-                '/(## Skills Activation\n)/',
-                '$1'.$skillEntry."\n",
-                $content,
-                1
-            );
-        }
-
-        file_put_contents($guidelinesPath, $content);
+        file_put_contents($skillInstructionFile, $content);
     }
 }
