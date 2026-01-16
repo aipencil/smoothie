@@ -21,7 +21,7 @@ Designed to work seamlessly with [Laravel Boost](https://github.com/aipencil/boo
 Install the package via Composer:
 
 ```bash
-composer require aipencil/smoothie
+composer require aipencil/smoothie --dev
 ```
 
 Publish the package configuration:
