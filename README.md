@@ -1,7 +1,5 @@
-# Smoothie
-
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/7d2b95c7-5150-40d8-ac62-07d3592c6af0" alt="Banner" style="width: 100%; max-width: 800px;" />
+    <img src="https://github.com/user-attachments/assets/d484ea6b-d07c-4390-981e-1786fbc0bc15" alt="Banner" style="width: 100%; max-width: 800px;" />
 </p>
 
 <p align="center">
