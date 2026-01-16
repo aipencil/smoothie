@@ -6,7 +6,7 @@
     <a href="https://github.com/aipencil/smoothie/actions"><img alt="Tests passing" src="https://img.shields.io/badge/Tests-passing-green?style=for-the-badge&logo=github"></a>
     <a href="https://laravel.com"><img alt="Laravel v12" src="https://img.shields.io/badge/Laravel-v12-FF2D20?style=for-the-badge&logo=laravel"></a>
     <a href="https://filamentphp.com"><img alt="Filament v4" src="https://img.shields.io/badge/Filament-v4-0EA5E9?style=for-the-badge"></a>
-    <a href="https://php.net"><img alt="PHP 8.4+" src="https://img.shields.io/badge/PHP-8.4+-777BB4?style=for-the-badge&logo=php"></a>
+    <a href="https://php.net"><img alt="PHP 8.3+" src="https://img.shields.io/badge/PHP-8.3+-777BB4?style=for-the-badge&logo=php"></a>
     <a href="https://github.com/aipencil/smoothie"><img alt="Boost-Compatible" src="https://img.shields.io/badge/Boost-Compatible-9333EA?style=for-the-badge"></a>
 </p>
 
