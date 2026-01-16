@@ -12,11 +12,7 @@
 
 Smoothie is a Filament Admin Agent skills installer package built with **Laravel Boost** that extends Filament with reusable features, tools, and UI enhancements to speed up Laravel admin panel development. It automatically installs skills to your AI editor's configuration and updates guideline files so your AI assistant knows how to help you build with Filament.
 
-Designed to work seamlessly with [Laravel Boost](https://github.com/aipencil/boost) MCP server, Smoothie enables AI-assisted Filament development with intelligent context and guidelines.
-
 ## Installation
-
-> **Note:** Smoothie requires [Laravel Boost](https://github.com/aipencil/boost) to be installed in your Laravel application. Boost provides the MCP server infrastructure that powers AI-assisted development.
 
 Install the package via Composer:
 
