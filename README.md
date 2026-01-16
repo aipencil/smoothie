@@ -32,13 +32,6 @@ php artisan smoothie:install
 
 This will set up Smoothie and configure your AI editor guidelines.
 
-**Important:** After installing Smoothie, update Laravel Boost to register the new package, then run Smoothie installation again:
-
-```bash
-php artisan boost:update
-php artisan smoothie:install
-```
-
 ## Usage
 
 ### Installing Skills
@@ -63,7 +56,6 @@ Smoothie automatically detects and works with these AI editors:
 - **VS Code** - GitHub Copilot
 - **Cursor** - Built-in AI
 - **Claude Code** - Claude Desktop
-- **GitHub Copilot** - Stand-alone
 - **PhpStorm** - JetBrains AI Assistant
 - **Gemini** - Google Gemini
 - **OpenCode** - Web-based editor
