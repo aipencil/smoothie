@@ -14,15 +14,6 @@ abstract class CodeEnvironment
 
     abstract public function guidelinesPath(): string;
 
-    /**
-     * Whether this code environment supports instruction files (applyTo patterns).
-     * VS Code/GitHub Copilot uses instruction files, Claude Code does not.
-     */
-    public function supportsInstructionFiles(): bool
-    {
-        return true;
-    }
-
     final public static function all(): array
     {
         return [
@@ -45,6 +36,15 @@ abstract class CodeEnvironment
         }
 
         return null;
+    }
+
+    /**
+     * Whether this code environment supports instruction files (applyTo patterns).
+     * VS Code/GitHub Copilot uses instruction files, Claude Code does not.
+     */
+    final public function supportsInstructionFiles(): bool
+    {
+        return true;
     }
 }
 
