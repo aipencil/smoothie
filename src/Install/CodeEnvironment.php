@@ -42,7 +42,7 @@ abstract class CodeEnvironment
      * Whether this code environment supports instruction files (applyTo patterns).
      * VS Code/GitHub Copilot uses instruction files, Claude Code does not.
      */
-    public function supportsInstructionFiles(): bool
+    final public function supportsInstructionFiles(): bool
     {
         return true;
     }
